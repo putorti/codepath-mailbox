@@ -30,9 +30,32 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed" id="MS8-QN-Ini">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1202"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="1202"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" id="hHf-AI-MrB">
+                                        <rect key="frame" x="-320" y="0.0" width="960" height="86"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="archive_icon" id="nGc-7Z-0Hv" userLabel="left-icon">
+                                                <rect key="frame" x="279" y="31" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" id="ecv-L0-Y9m">
+                                                <rect key="frame" x="320" y="0.0" width="320" height="86"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="later_icon" id="cP8-5t-Usk" userLabel="right-icon">
+                                                <rect key="frame" x="659" y="30" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Mu0-tI-Qgv" appends="YES" id="mhk-3R-BQk"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -41,16 +64,26 @@
                     <connections>
                         <outlet property="feedImage" destination="MS8-QN-Ini" id="lXR-7L-DA0"/>
                         <outlet property="feedScroller" destination="ioq-Le-aid" id="9ec-dw-Ieo"/>
+                        <outlet property="messagePan" destination="Mu0-tI-Qgv" id="pfW-v4-Z7P"/>
+                        <outlet property="messageView" destination="hHf-AI-MrB" id="wNh-de-lup"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Mu0-tI-Qgv">
+                    <connections>
+                        <action selector="onMessagePan:" destination="BYZ-38-t0r" id="ama-tw-Bmj"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="162" y="350"/>
         </scene>
     </scenes>
     <resources>
+        <image name="archive_icon" width="25" height="25"/>
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
+        <image name="later_icon" width="25" height="25"/>
+        <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
         <image name="search" width="320" height="42"/>
     </resources>
