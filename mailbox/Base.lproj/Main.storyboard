@@ -80,9 +80,11 @@
                         <outlet property="edgePan" destination="VFe-lS-D3d" id="810-hZ-Z32"/>
                         <outlet property="feedImage" destination="MS8-QN-Ini" id="lXR-7L-DA0"/>
                         <outlet property="feedScroller" destination="ioq-Le-aid" id="9ec-dw-Ieo"/>
+                        <outlet property="leftIcon" destination="nGc-7Z-0Hv" id="1WR-8N-wr9"/>
                         <outlet property="mainUI" destination="MU4-yZ-1UC" id="OvL-Z0-YsI"/>
                         <outlet property="messagePan" destination="Mu0-tI-Qgv" id="pfW-v4-Z7P"/>
                         <outlet property="messageView" destination="hHf-AI-MrB" id="wNh-de-lup"/>
+                        <outlet property="rightIcon" destination="cP8-5t-Usk" id="Z9y-5J-oTB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
