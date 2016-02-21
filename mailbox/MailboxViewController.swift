@@ -32,9 +32,9 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
         messageView.addGestureRecognizer(messagePan)
         
-        var edgeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
-        
-        view.addGestureRecognizer(edgePan)
+        edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
+        edgePan.edges = UIRectEdge.Left
+        mainUI.addGestureRecognizer(edgePan)
     }
     
     override func didReceiveMemoryWarning() {
