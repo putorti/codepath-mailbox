@@ -14,6 +14,7 @@
 		961A67721C79589A002AC5C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 961A67701C79589A002AC5C6 /* LaunchScreen.storyboard */; };
 		961A677D1C79589B002AC5C6 /* mailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961A677C1C79589B002AC5C6 /* mailboxTests.swift */; };
 		961A67881C79589B002AC5C6 /* mailboxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961A67871C79589B002AC5C6 /* mailboxUITests.swift */; };
+		961A67961C795B37002AC5C6 /* MailboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961A67951C795B37002AC5C6 /* MailboxViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		961A67831C79589B002AC5C6 /* mailboxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mailboxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		961A67871C79589B002AC5C6 /* mailboxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mailboxUITests.swift; sourceTree = "<group>"; };
 		961A67891C79589B002AC5C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		961A67951C795B37002AC5C6 /* MailboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailboxViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		961A67661C79589A002AC5C6 /* mailbox */ = {
 			isa = PBXGroup;
 			children = (
+				961A67971C795B3B002AC5C6 /* View Controllers */,
 				961A67671C79589A002AC5C6 /* AppDelegate.swift */,
 				961A67691C79589A002AC5C6 /* ViewController.swift */,
 				961A676B1C79589A002AC5C6 /* Main.storyboard */,
@@ -123,6 +126,14 @@
 				961A67891C79589B002AC5C6 /* Info.plist */,
 			);
 			path = mailboxUITests;
+			sourceTree = "<group>";
+		};
+		961A67971C795B3B002AC5C6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				961A67951C795B37002AC5C6 /* MailboxViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			files = (
 				961A676A1C79589A002AC5C6 /* ViewController.swift in Sources */,
 				961A67681C79589A002AC5C6 /* AppDelegate.swift in Sources */,
+				961A67961C795B37002AC5C6 /* MailboxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
