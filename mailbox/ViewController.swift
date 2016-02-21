@@ -14,6 +14,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var feedImage: UIImageView!
     @IBOutlet weak var messageView: UIView!
     @IBOutlet var messagePan: UIPanGestureRecognizer!
+    @IBOutlet var edgePan: UIScreenEdgePanGestureRecognizer!
+    @IBOutlet weak var mainUI: UIView!
     var messageOriginalCenter: CGPoint!
     var messageCenter: CGPoint!
     
@@ -28,7 +30,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         var panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "onMessagePan:")
         
         // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
-        view.addGestureRecognizer(messagePan)
+        messageView.addGestureRecognizer(messagePan)
+        
+        var edgeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
+        
+        view.addGestureRecognizer(edgePan)
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +63,26 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             
             messageView.center = messageOriginalCenter // snap back to origin
         }
+    }
+    
+    func onEdgePan(edgeGestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        
+        // Absolute (x,y) coordinates in parent view
+        var point = edgeGestureRecognizer.locationInView(view)
+        
+        // Relative change in (x,y) coordinates from where gesture began.
+        var translation = edgeGestureRecognizer.translationInView(view)
+        var velocity = edgeGestureRecognizer.velocityInView(view)
+        
+        if edgeGestureRecognizer.state == UIGestureRecognizerState.Began {
+            print("Edge gesture began at: \(point)")
+        } else if edgeGestureRecognizer.state == UIGestureRecognizerState.Changed {
+            print("Edge gesture changed at: \(point)")
+            
+        } else if edgeGestureRecognizer.state == UIGestureRecognizerState.Ended {
+            print("Edge gesture ended at: \(point)")
+        }
+        
     }
 
 }
