@@ -33,10 +33,6 @@
                                         <rect key="frame" x="0.0" y="160" width="320" height="408"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed" id="MS8-QN-Ini">
-                                                <rect key="frame" x="0.0" y="86" width="320" height="1202"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                             <view contentMode="scaleToFill" id="hHf-AI-MrB">
                                                 <rect key="frame" x="-320" y="0.0" width="960" height="86"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -60,6 +56,10 @@
                                                     <outletCollection property="gestureRecognizers" destination="Mu0-tI-Qgv" appends="YES" id="mhk-3R-BQk"/>
                                                 </connections>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed" id="MS8-QN-Ini">
+                                                <rect key="frame" x="0.0" y="86" width="320" height="1202"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                     </scrollView>
                                     <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" id="hjf-K2-Cqb">
@@ -84,6 +84,14 @@
                                             <outletCollection property="gestureRecognizers" destination="Mp9-3F-oEZ" appends="YES" id="FPZ-Jp-Qbu"/>
                                         </connections>
                                     </imageView>
+                                    <imageView alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list" id="QYt-4c-ZFE">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="9Tb-q8-NlD" appends="YES" id="GzD-xc-9Ux"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -100,6 +108,8 @@
                         <outlet property="feedScroller" destination="ioq-Le-aid" id="9ec-dw-Ieo"/>
                         <outlet property="leftIcon" destination="nGc-7Z-0Hv" id="1WR-8N-wr9"/>
                         <outlet property="mainUI" destination="MU4-yZ-1UC" id="OvL-Z0-YsI"/>
+                        <outlet property="menuImage" destination="QYt-4c-ZFE" id="K4T-o1-Hka"/>
+                        <outlet property="menuTap" destination="9Tb-q8-NlD" id="mnt-KO-qiS"/>
                         <outlet property="messagePan" destination="Mu0-tI-Qgv" id="pfW-v4-Z7P"/>
                         <outlet property="messageView" destination="hHf-AI-MrB" id="wNh-de-lup"/>
                         <outlet property="rescheduleImage" destination="QuB-FU-yfn" id="3tp-Ds-5wN"/>
@@ -117,6 +127,7 @@
                     <rectEdge key="edges" left="YES"/>
                 </screenEdgePanGestureRecognizer>
                 <tapGestureRecognizer id="Mp9-3F-oEZ"/>
+                <tapGestureRecognizer id="9Tb-q8-NlD"/>
             </objects>
             <point key="canvasLocation" x="162" y="350"/>
         </scene>
@@ -128,6 +139,7 @@
         <image name="help_label" width="320" height="37"/>
         <image name="later_icon" width="25" height="25"/>
         <image name="later_nav_icon" width="25" height="20"/>
+        <image name="list" width="320" height="568"/>
         <image name="mail_nav_icon" width="25" height="20"/>
         <image name="menu" width="320" height="568"/>
         <image name="message" width="320" height="86"/>

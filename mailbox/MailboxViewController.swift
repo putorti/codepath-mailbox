@@ -10,6 +10,8 @@ import UIKit
 
 class MailboxViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet var menuTap: UITapGestureRecognizer!
+    @IBOutlet weak var menuImage: UIImageView!
     @IBOutlet weak var rescheduleImage: UIImageView!
     @IBOutlet weak var feedScroller: UIScrollView!
     @IBOutlet weak var feedImage: UIImageView!
@@ -50,6 +52,10 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         // schedule tap gesture
         scheduleTap = UITapGestureRecognizer(target: self, action: "onImageTap:")
         rescheduleImage.addGestureRecognizer(scheduleTap)
+        
+        // menu tap gesture
+        menuTap = UITapGestureRecognizer(target: self, action: "onImageTap:")
+        menuImage.addGestureRecognizer(menuTap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,6 +66,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     func onImageTap(tapGestureRecognizer: UITapGestureRecognizer) {
         UIView.animateWithDuration(0.25, animations: {
             self.rescheduleImage.alpha = 0
+            self.menuImage.alpha = 0
         },
         completion: { finished in
             self.deleteMessage()
@@ -68,9 +75,8 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     
     func deleteMessage() {
         UIView.animateWithDuration(0.25, animations: {
-            self.messageView.frame.size.height = 0
+            self.feedImage.frame.origin.y = 0;
         })
-        print("deleted")
     }
     
     func onMessagePan(panGestureRecognizer: UIPanGestureRecognizer) {
@@ -119,22 +125,33 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
             switch messageView.frame.origin.x {
                 
             case -260 ... -120: // archive
-                rescheduleImage.alpha = 0;
+                UIView.animateWithDuration(0.25, animations: {
+                    self.messageView.frame.origin.x = 0;
+                }, completion: { finished in
+                    self.deleteMessage()
+                })
             case -600 ... -480: // list
-                rescheduleImage.alpha = 0;
+                UIView.animateWithDuration(0.25, animations: {
+                    self.messageView.frame.origin.x = -640;
+                    self.menuImage.alpha = 1;
+                })
             case -480 ... -380: // later
                 UIView.animateWithDuration(0.25, animations: {
-                self.rescheduleImage.alpha = 1;
-                    })
+                    self.messageView.frame.origin.x = -640;
+                    self.rescheduleImage.alpha = 1;
+                })
             case -120 ... 0: // delete
-                rescheduleImage.alpha = 0;
+                UIView.animateWithDuration(0.25, animations: {
+                    self.messageView.frame.origin.x = 0;
+                }, completion: { finished in
+                    self.deleteMessage()
+                })
             default: // no action
-                rescheduleImage.alpha = 0;
-                
+                UIView.animateWithDuration(0.25, animations: {
+                    self.messageView.center = self.messageOriginalCenter // snap back to origin
+                    self.messageView.backgroundColor = self.messageOriginalColor
+                })
             }
-            
-            messageView.center = messageOriginalCenter // snap back to origin
-            messageView.backgroundColor = messageOriginalColor
         }
     }
     
