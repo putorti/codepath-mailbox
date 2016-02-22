@@ -30,6 +30,18 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     var mainUICenter: CGPoint!
     var defaultGray: UIColor!
     
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?)
+    {
+        if motion == .MotionShake
+        {
+            undoDelete()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         feedScroller.delegate = self
@@ -76,6 +88,15 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     func deleteMessage() {
         UIView.animateWithDuration(0.25, animations: {
             self.feedImage.frame.origin.y = 0;
+        })
+    }
+    
+    func undoDelete() {
+        self.messageView.center = self.messageOriginalCenter // snap back to origin
+        self.messageView.backgroundColor = self.messageOriginalColor
+        
+        UIView.animateWithDuration(0.25, animations: {
+            self.feedImage.frame.origin.y = 86
         })
     }
     
