@@ -76,6 +76,14 @@
                                         </segments>
                                         <color key="tintColor" red="0.41176470588235292" green="0.73725490196078436" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                     </segmentedControl>
+                                    <imageView alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reschedule" id="QuB-FU-yfn">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Mp9-3F-oEZ" appends="YES" id="FPZ-Jp-Qbu"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -94,7 +102,9 @@
                         <outlet property="mainUI" destination="MU4-yZ-1UC" id="OvL-Z0-YsI"/>
                         <outlet property="messagePan" destination="Mu0-tI-Qgv" id="pfW-v4-Z7P"/>
                         <outlet property="messageView" destination="hHf-AI-MrB" id="wNh-de-lup"/>
+                        <outlet property="rescheduleImage" destination="QuB-FU-yfn" id="3tp-Ds-5wN"/>
                         <outlet property="rightIcon" destination="cP8-5t-Usk" id="Z9y-5J-oTB"/>
+                        <outlet property="scheduleTap" destination="Mp9-3F-oEZ" id="JY8-5i-rYi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -106,6 +116,7 @@
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="VFe-lS-D3d">
                     <rectEdge key="edges" left="YES"/>
                 </screenEdgePanGestureRecognizer>
+                <tapGestureRecognizer id="Mp9-3F-oEZ"/>
             </objects>
             <point key="canvasLocation" x="162" y="350"/>
         </scene>
@@ -121,6 +132,7 @@
         <image name="menu" width="320" height="568"/>
         <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
+        <image name="reschedule" width="320" height="568"/>
         <image name="search" width="320" height="42"/>
     </resources>
 </document>

@@ -10,6 +10,7 @@ import UIKit
 
 class MailboxViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var rescheduleImage: UIImageView!
     @IBOutlet weak var feedScroller: UIScrollView!
     @IBOutlet weak var feedImage: UIImageView!
     @IBOutlet weak var messageView: UIView!
@@ -18,13 +19,14 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var mainUI: UIView!
     @IBOutlet weak var leftIcon: UIImageView!
     @IBOutlet weak var rightIcon: UIImageView!
+    @IBOutlet var scheduleTap: UITapGestureRecognizer!
     
     var messageOriginalColor: UIColor!
     var messageOriginalCenter: CGPoint!
     var messageCenter: CGPoint!
     var mainUIOriginalCenter: CGPoint!
     var mainUICenter: CGPoint!
-    
+    var defaultGray: UIColor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,23 +35,42 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         messageOriginalCenter = messageView.center
         mainUIOriginalCenter = mainUI.center
         messageOriginalColor = messageView.backgroundColor!
+        defaultGray = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+        messageView.backgroundColor = defaultGray
         
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // The onCustomPan: method will be defined in Step 3 below.
-        var panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "onMessagePan:")
-        
-        // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
+        // message pan gestures
+        messagePan = UIPanGestureRecognizer(target: self, action: "onMessagePan:")
         messageView.addGestureRecognizer(messagePan)
         
+        // edge swipe
         edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
         edgePan.edges = UIRectEdge.Left
         mainUI.addGestureRecognizer(edgePan)
+        
+        // schedule tap gesture
+        scheduleTap = UITapGestureRecognizer(target: self, action: "onImageTap:")
+        rescheduleImage.addGestureRecognizer(scheduleTap)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func onImageTap(tapGestureRecognizer: UITapGestureRecognizer) {
+        UIView.animateWithDuration(0.25, animations: {
+            self.rescheduleImage.alpha = 0
+        },
+        completion: { finished in
+            self.deleteMessage()
+        })
+    }
+    
+    func deleteMessage() {
+        UIView.animateWithDuration(0.25, animations: {
+            self.messageView.frame.size.height = 0
+        })
+        print("deleted")
     }
     
     func onMessagePan(panGestureRecognizer: UIPanGestureRecognizer) {
@@ -68,31 +89,50 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
             messageView.center = CGPoint(x: messageOriginalCenter.x + translation.x, y: messageOriginalCenter.y) // allow drag on x-axis only
             print("frame X: \(messageView.frame.origin.x)")
             
-            if messageView.frame.origin.x < -320 { // pulled left
-                if messageView.frame.origin.x < -530 {
-                    messageView.backgroundColor = UIColor(red: 0.81, green: 0.76, blue: 0.15, alpha: 1)
-                    rightIcon.image = UIImage(named: "list_icon")
-                    print("menu")
-                } else {
-                    messageView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0, alpha: 1)
-                    rightIcon.image = UIImage(named: "later_icon")
-                    print("later")
-                }
-            } else { // pulled right
-                print("pulled right")
-                if messageView.frame.origin.x > -120 {
-                    messageView.backgroundColor = UIColor(red: 0.95, green: 0, blue: 0, alpha: 1)
-                    leftIcon.image = UIImage(named: "delete_icon")
-                    print("delete")
-                } else {
-                    messageView.backgroundColor = UIColor(red: 0, green: 0.95, blue: 0, alpha: 1)
-                    leftIcon.image = UIImage(named: "archive_icon")
-                    print("archive")
-                }
+            switch messageView.frame.origin.x {
+                
+            case -260 ... -120: // archive
+                messageView.backgroundColor = UIColor(red: 112/255, green: 216/255, blue: 98/255, alpha: 1)
+                leftIcon.image = UIImage(named: "archive_icon")
+                print("archive")
+            case -600 ... -480: // list
+                messageView.backgroundColor = UIColor(red: 216/255, green: 166/255, blue: 117/255, alpha: 1)
+                rightIcon.image = UIImage(named: "list_icon")
+                print("menu")
+            case -480 ... -380: // later
+                messageView.backgroundColor = UIColor(red: 250/255, green: 211/255, blue: 51/255, alpha: 1)
+                rightIcon.image = UIImage(named: "later_icon")
+                print("later")
+            case -120 ... 0: // delete
+                messageView.backgroundColor = UIColor(red: 235/255, green: 84/255, blue: 51/255, alpha: 1)
+                leftIcon.image = UIImage(named: "delete_icon")
+                print("delete")
+            default: // no action
+                messageView.backgroundColor = defaultGray
+                leftIcon.image = UIImage(named: "archive_icon")
+                rightIcon.image = UIImage(named: "later_icon")
             }
             
         } else if panGestureRecognizer.state == UIGestureRecognizerState.Ended {
             print("Gesture ended at: \(point)")
+            
+            switch messageView.frame.origin.x {
+                
+            case -260 ... -120: // archive
+                rescheduleImage.alpha = 0;
+            case -600 ... -480: // list
+                rescheduleImage.alpha = 0;
+            case -480 ... -380: // later
+                UIView.animateWithDuration(0.25, animations: {
+                self.rescheduleImage.alpha = 1;
+                    })
+            case -120 ... 0: // delete
+                rescheduleImage.alpha = 0;
+            default: // no action
+                rescheduleImage.alpha = 0;
+                
+            }
+            
             messageView.center = messageOriginalCenter // snap back to origin
             messageView.backgroundColor = messageOriginalColor
         }
