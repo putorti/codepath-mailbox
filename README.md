@@ -3,7 +3,7 @@ Mailbox prototype for week 3 homework
 
 The purpose of this homework is to leverage animations and gestures to implement more sophisticated interactions. We're going to use the techniques from this week to implement the Mailbox interactions.
 
-Time spent: 12
+Time spent: 11 hours
 
 On dragging the message left:
 
@@ -34,5 +34,3 @@ Optional
 * [x] Shake to undo.
 
 ![Video Walkthrough](demo.gif)
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
